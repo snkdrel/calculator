@@ -105,6 +105,14 @@ function OpClicked(op){
     // remove boldness
     display.classList.remove('final-result');
 
+    // if two operands are clicked one after the other
+    if(lastButtonPressed == 'operator'){
+        currentOp = op;
+        updateDisplayValue();
+        lastButtonPressed = 'operator';
+        return;
+    }
+
     if(prevVal == ''){
         prevVal = currentVal;
     }else{
