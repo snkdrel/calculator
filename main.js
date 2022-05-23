@@ -2,7 +2,7 @@
 let prevVal = '';
 let currentVal = 0;
 let currentOp = '';
-let equalFlag = false;
+let lastButtonPressed = 'number';
 
 const display = document.querySelector('.display');
 // buttons
@@ -75,6 +75,7 @@ function numbClicked(buttonValue){
         currentVal = currentVal.toString() + buttonValue;
     }
     updateDisplayValue();
+    lastButtonPressed = 'number';
 }
 
 function updateDisplayValue(buttonValue){
@@ -92,6 +93,7 @@ function resetAll(){
     currentOp = '';
     currentVal = 0;
     updateDisplayValue();
+    lastButtonPressed = 'number';
 }
 
 // when operator button is clicked
@@ -109,12 +111,19 @@ function OpClicked(op){
         prevVal = operate(currentOp, prevVal, currentVal);
     }
     currentOp = op;
-    currentVal = 0;
+    currentVal = '';
     updateDisplayValue();
+    lastButtonPressed = 'operator';
 }
 
 // equal button
 equalButton.addEventListener('click', () => {
+    // prevents clicking equal immediately after an operator
+    if(lastButtonPressed == 'operator'){
+       alert('Missing operand');
+       return;
+    }
+
     if(prevVal != ''){
         const result = operate(currentOp, prevVal, currentVal);
         prevVal = '';
@@ -122,6 +131,7 @@ equalButton.addEventListener('click', () => {
         currentVal = result;
         updateDisplayValue();
     }
+
     // reset values so next value entered replaces current value in display
     prevVal = '';
     currentOp = '';
