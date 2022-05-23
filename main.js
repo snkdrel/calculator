@@ -80,7 +80,11 @@ opButtons.forEach((b)=>{
 });
 
 function OpClicked(op){
-    prevVal = currentVal;
+    if(prevVal == ''){
+        prevVal = currentVal;
+    }else{
+        prevVal = operate(currentOp, prevVal, currentVal);
+    }
     currentOp = op;
     currentVal = 0;
     updateDisplayValue();
