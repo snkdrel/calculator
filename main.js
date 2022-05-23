@@ -51,3 +51,7 @@ function updateDisplayValue(buttonValue){
         display.textContent = display.textContent + buttonValue;
     }
 }
+
+// clear button
+const clearButton = document.querySelector('.clear-button');
+clearButton.addEventListener('click', () => display.textContent = '0');
