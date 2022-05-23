@@ -8,10 +8,11 @@ const display = document.querySelector('.display');
 const numberButtons = document.querySelectorAll('.number-button');
 const clearButton = document.querySelector('.clear-button');
 const opButtons = document.querySelectorAll('.op-button');
+const equalButton = document.querySelector('.equal-button');
 
 // Basic operations
 let add = function(a, b){
-    return a + b;
+    return +a + +b;
 }
 
 let subtract = function(a, b){
@@ -84,4 +85,13 @@ function OpClicked(op){
     currentVal = 0;
     updateDisplayValue();
 }
+
+// equal button
+equalButton.addEventListener('click', () => {
+    const result = operate(currentOp, prevVal, currentVal);
+    prevVal = '';
+    currentOp = '';
+    currentVal = result;
+    updateDisplayValue();
+});
 
