@@ -1,3 +1,14 @@
+// ----- global variables -------
+let prevVal = '';
+let currentVal = 0;
+let currentOp = '';
+
+const display = document.querySelector('.display');
+// buttons
+const numberButtons = document.querySelectorAll('.number-button');
+const clearButton = document.querySelector('.clear-button');
+const opButtons = document.querySelectorAll('.op-button');
+
 // Basic operations
 let add = function(a, b){
     return a + b;
@@ -37,21 +48,40 @@ let operate = function(operator, numb1, numb2){
 }
 
 // --- display functions ----
-const display = document.querySelector('.display');
-
-const numberButtons = document.querySelectorAll('.number-button');
 numberButtons.forEach((b) => {
-    b.addEventListener('click', () => updateDisplayValue(b.textContent) );
+    b.addEventListener('click', () => numbClicked(b.textContent) );
 });
 
-function updateDisplayValue(buttonValue){
-    if(display.textContent == 0){
-        display.textContent = buttonValue;
+function numbClicked(buttonValue){
+    if(currentVal == 0){
+        currentVal = buttonValue;
     }else{
-        display.textContent = display.textContent + buttonValue;
+        currentVal = currentVal.toString() + buttonValue;
     }
+    updateDisplayValue();
+}
+
+function updateDisplayValue(buttonValue){
+    display.textContent = prevVal + currentOp + currentVal;
 }
 
 // clear button
-const clearButton = document.querySelector('.clear-button');
-clearButton.addEventListener('click', () => display.textContent = '0');
+clearButton.addEventListener('click', () => {
+    prevVal = '';
+    currentOp = '';
+    currentVal = 0;
+    updateDisplayValue();
+});
+
+// when operator button is clicked
+opButtons.forEach((b)=>{
+    b.addEventListener('click', () => OpClicked(b.textContent));
+});
+
+function OpClicked(op){
+    prevVal = currentVal;
+    currentOp = op;
+    currentVal = 0;
+    updateDisplayValue();
+}
+
