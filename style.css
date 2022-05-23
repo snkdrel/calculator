@@ -17,6 +17,10 @@
     background-color: skyblue;
 }
 
+.final-result{
+    font-weight: bold;
+}
+
 /*button style*/
 button{
     width: 60px;

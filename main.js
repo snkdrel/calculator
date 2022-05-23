@@ -2,6 +2,7 @@
 let prevVal = '';
 let currentVal = 0;
 let currentOp = '';
+let equalFlag = false;
 
 const display = document.querySelector('.display');
 // buttons
@@ -53,7 +54,11 @@ numberButtons.forEach((b) => {
     b.addEventListener('click', () => numbClicked(b.textContent) );
 });
 
+// number button
 function numbClicked(buttonValue){
+    // remove boldness
+    display.classList.remove('final-result');
+
     if(currentVal == 0){
         currentVal = buttonValue;
     }else{
@@ -68,6 +73,9 @@ function updateDisplayValue(buttonValue){
 
 // clear button
 clearButton.addEventListener('click', () => {
+    // remove boldness
+    display.classList.remove('final-result');
+
     prevVal = '';
     currentOp = '';
     currentVal = 0;
@@ -80,6 +88,9 @@ opButtons.forEach((b)=>{
 });
 
 function OpClicked(op){
+    // remove boldness
+    display.classList.remove('final-result');
+    
     if(prevVal == ''){
         prevVal = currentVal;
     }else{
@@ -99,5 +110,10 @@ equalButton.addEventListener('click', () => {
         currentVal = result;
         updateDisplayValue();
     }
+    // reset values so next value entered replaces current value in display
+    prevVal = '';
+    currentOp = '';
+    currentVal = 0;
+    display.classList.add('final-result'); // show result in bold
 });
 
