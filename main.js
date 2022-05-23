@@ -45,5 +45,9 @@ numberButtons.forEach((b) => {
 });
 
 function updateDisplayValue(buttonValue){
-    display.textContent = buttonValue;
+    if(display.textContent == 0){
+        display.textContent = buttonValue;
+    }else{
+        display.textContent = display.textContent + buttonValue;
+    }
 }
