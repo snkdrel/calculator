@@ -88,10 +88,12 @@ function OpClicked(op){
 
 // equal button
 equalButton.addEventListener('click', () => {
-    const result = operate(currentOp, prevVal, currentVal);
-    prevVal = '';
-    currentOp = '';
-    currentVal = result;
-    updateDisplayValue();
+    if(prevVal != ''){
+        const result = operate(currentOp, prevVal, currentVal);
+        prevVal = '';
+        currentOp = '';
+        currentVal = result;
+        updateDisplayValue();
+    }
 });
 
