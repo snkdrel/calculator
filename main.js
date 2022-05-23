@@ -41,12 +41,22 @@ let operate = function(operator, numb1, numb2){
             res = multiply(numb1, numb2);
             break;
         case '/':
-            res = divide(numb1, numb2);
+            if( numb2 == 0){
+                divideByZeroError();
+                return 0;
+            }else{
+                res = divide(numb1, numb2);
+            }
             break;
         default:
             alert('Invalid operation');
     }
     return res;
+}
+
+function divideByZeroError(){
+    alert("ERROR: Division by zero not permitted.");
+    resetAll();
 }
 
 // --- display functions ----
@@ -72,7 +82,9 @@ function updateDisplayValue(buttonValue){
 }
 
 // clear button
-clearButton.addEventListener('click', () => {
+clearButton.addEventListener('click', resetAll);
+
+function resetAll(){
     // remove boldness
     display.classList.remove('final-result');
 
@@ -80,7 +92,7 @@ clearButton.addEventListener('click', () => {
     currentOp = '';
     currentVal = 0;
     updateDisplayValue();
-});
+}
 
 // when operator button is clicked
 opButtons.forEach((b)=>{
@@ -90,7 +102,7 @@ opButtons.forEach((b)=>{
 function OpClicked(op){
     // remove boldness
     display.classList.remove('final-result');
-    
+
     if(prevVal == ''){
         prevVal = currentVal;
     }else{
