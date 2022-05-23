@@ -15,7 +15,6 @@ let divide = function(a, b){
     return a / b;
 }
 
-// operate
 let operate = function(operator, numb1, numb2){
     let res;
     switch(operator){
@@ -35,4 +34,16 @@ let operate = function(operator, numb1, numb2){
             alert('Invalid operation');
     }
     return res;
+}
+
+// --- display functions ----
+const display = document.querySelector('.display');
+
+const numberButtons = document.querySelectorAll('.number-button');
+numberButtons.forEach((b) => {
+    b.addEventListener('click', () => updateDisplayValue(b.textContent) );
+});
+
+function updateDisplayValue(buttonValue){
+    display.textContent = buttonValue;
 }
