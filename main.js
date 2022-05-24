@@ -69,7 +69,7 @@ function numbClicked(buttonValue){
     // remove boldness
     display.classList.remove('final-result');
 
-    if(currentVal == 0){
+    if(currentVal == 0 || lastButtonPressed == 'equal'){
         currentVal = buttonValue;
     }else{
         currentVal = currentVal.toString() + buttonValue;
@@ -132,7 +132,8 @@ equalButton.addEventListener('click', () => {
        return;
     }
 
-    if(prevVal != ''){
+    // if there is only a number in display
+    if(currentOp != ''){
         currentVal = operate(currentOp, prevVal, currentVal);   
     }
     prevVal = '';
@@ -141,5 +142,7 @@ equalButton.addEventListener('click', () => {
 
     // reset values so next value entered replaces current value in display
     display.classList.add('final-result'); // show result in bold
+
+    lastButtonPressed = 'equal';
 });
 
