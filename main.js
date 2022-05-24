@@ -133,17 +133,13 @@ equalButton.addEventListener('click', () => {
     }
 
     if(prevVal != ''){
-        const result = operate(currentOp, prevVal, currentVal);
-        prevVal = '';
-        currentOp = '';
-        currentVal = result;
-        updateDisplayValue();
+        currentVal = operate(currentOp, prevVal, currentVal);   
     }
-
-    // reset values so next value entered replaces current value in display
     prevVal = '';
     currentOp = '';
-    currentVal = 0;
+    updateDisplayValue();
+
+    // reset values so next value entered replaces current value in display
     display.classList.add('final-result'); // show result in bold
 });
 
